@@ -1,18 +1,17 @@
 import React from 'react';
 import {
   Avatar,
-  ButtonAdd,
   Container,
   Header,
-  IconButtonAdd,
   Main,
   Text,
-  TextButtonAdd
 } from './styles';
 import { Image } from 'react-native';
 
 import logo from '@assets/logo.png'
 import { PercentStatus } from '@components/PercentStatus';
+import { MealsList } from '@components/MealsList';
+import { ButtonAddMeal } from '@components/ButtonAddMeal';
 
 export function Home() {
   return (
@@ -30,17 +29,11 @@ export function Home() {
 
       <PercentStatus positive />
 
-
       <Main>
-        <Text>
-          Refeições
-        </Text>
-        <ButtonAdd activeOpacity={0.8}>
-          <IconButtonAdd />
-          <TextButtonAdd>
-            Nova refeição
-          </TextButtonAdd>
-        </ButtonAdd>
+        <Text> Refeições </Text>
+        <ButtonAddMeal />
+        
+        <MealsList />
       </Main>
 
     </Container>
