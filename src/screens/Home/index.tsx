@@ -7,11 +7,11 @@ import {
   Text,
 } from './styles';
 import { Image } from 'react-native';
-
-import logo from '@assets/logo.png'
 import { PercentStatus } from '@components/PercentStatus';
 import { MealsList } from '@components/MealsList';
 import { ButtonAddMeal } from '@components/ButtonAddMeal';
+
+import logo from '@assets/logo.png'
 
 export function Home() {
   return (
@@ -32,7 +32,7 @@ export function Home() {
       <Main>
         <Text> Refeições </Text>
         <ButtonAddMeal />
-        
+
         <MealsList />
       </Main>
 

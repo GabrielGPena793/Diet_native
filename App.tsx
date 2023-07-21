@@ -2,7 +2,9 @@ import { ThemeProvider } from "styled-components/native";
 import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from '@expo-google-fonts/nunito-sans'
 
 import { ActivityIndicator } from "react-native";
+
 import { Home } from "@screens/Home";
+import { DetailPercent } from "@screens/DetailPercent";
 
 import theme from "@theme/default";
 
@@ -11,7 +13,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoad ? <Home /> :  <ActivityIndicator /> }
+      {fontsLoad ? <DetailPercent /> :  <ActivityIndicator /> }
     </ThemeProvider>
   );
 }
