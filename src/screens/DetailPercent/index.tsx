@@ -1,31 +1,33 @@
 import React from 'react';
-import { 
-  Arrow, 
-  Container, 
-  ContainerArrowBack, 
-  HeightLight, 
-  Main, 
-  Text, 
-  TextStrong, 
-  Tittle, 
-  boxShadow 
+import {
+  Container,
+  HeightLight,
+  Main,
+  Text,
+  TextStrong,
+  Tittle,
+  boxShadow
 } from './styles';
 import { CardMealDetail } from '@components/CardMealDetail';
 import { View } from 'react-native';
+import { ButtonBack } from '@components/ButtonBack';
 
 export function DetailPercent() {
 
-  function click() {
+  function back() {
     console.log('click');
   }
 
   return (
     <Container insideDiet>
-      <ContainerArrowBack activeOpacity={0.5} onPress={click}>
-        <Arrow  />
-      </ContainerArrowBack>
 
       <HeightLight >
+        <ButtonBack
+          style={{ alignSelf: 'flex-start' }}
+          colorArrow='green_dark'
+          onPress={back}
+        />
+
         <TextStrong> 90,86% </TextStrong>
         <Text> das refeições dentro da dieta </Text>
       </HeightLight>

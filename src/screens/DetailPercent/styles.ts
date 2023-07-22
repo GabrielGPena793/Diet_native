@@ -10,8 +10,6 @@ interface HeightLightProps {
 export const Container = styled.SafeAreaView<HeightLightProps>`
   flex: 1;
 
-  position: relative;
-
   background: ${({ theme, insideDiet }) =>
     insideDiet ? theme.COLORS.green_light : theme.COLORS.red_light};
 
@@ -19,9 +17,10 @@ export const Container = styled.SafeAreaView<HeightLightProps>`
 
 export const HeightLight = styled.View`
   flex: 0.2;
-
+  padding-left: 24px;
   justify-content: center;
   align-items: center;
+  padding-top: 8px;
 `;
 
 export const TextStrong = styled.Text`
@@ -56,7 +55,7 @@ export const Main = styled.View`
 export const boxShadow = {
   shadowColor: '#333638',
   shadowOffset: {width: 5, height: 32},
-  shadowOpacity: 0.2,
+  shadowOpacity: 0.5,
   shadowRadius: 20,
   elevation: 30,
 }
@@ -75,14 +74,3 @@ export const Tittle = styled.Text`
 `;
 
 
-export const ContainerArrowBack = styled(TouchableOpacity)`
-  position: absolute;
-  top: 46px;
-  left: 24px;
-  z-index: 10;
-`
-
-export const Arrow = styled(ArrowLeft).attrs(({ theme }) => ({
-  size: 24,
-  color: theme.COLORS.green_dark,
-}))``

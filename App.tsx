@@ -5,6 +5,7 @@ import { ActivityIndicator } from "react-native";
 
 import { Home } from "@screens/Home";
 import { DetailPercent } from "@screens/DetailPercent";
+import { NewMeal } from "@screens/NewMeal";
 
 import theme from "@theme/default";
 
@@ -13,7 +14,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoad ? <DetailPercent /> :  <ActivityIndicator /> }
+      {fontsLoad ? <NewMeal /> :  <ActivityIndicator /> }
     </ThemeProvider>
   );
 }
