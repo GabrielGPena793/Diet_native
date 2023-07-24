@@ -21,6 +21,8 @@ export const HeightLight = styled.View`
   justify-content: center;
   align-items: center;
   padding-top: 8px;
+
+  position: relative;
 `;
 
 export const TextStrong = styled.Text`

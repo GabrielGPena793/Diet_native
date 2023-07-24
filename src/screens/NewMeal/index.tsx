@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { View } from 'react-native';
-import { ButtonBack } from '@components/ButtonBack';
 import { Input } from '@components/Input';
 import { RadioButton } from '@components/RadioButton';
 import { Button } from '@components/Button';
@@ -26,7 +25,7 @@ export function NewMeal() {
 
   return (
     <Container>
-      <HeaderBack />
+      <HeaderBack text='Nova refeição' />
 
       <Form style={boxShadow}>
         <Input label='Nome' placeholder='example' />

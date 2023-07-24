@@ -3,6 +3,9 @@ import { TouchableOpacity } from "react-native"
 import styled from "styled-components/native"
 
 export const ContainerArrowBack = styled(TouchableOpacity)`
+
+  position: absolute;
+  left: 24px;
 `
 
 export interface ArrowStylesProps {

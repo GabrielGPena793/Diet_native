@@ -23,7 +23,7 @@ export function DetailPercent() {
 
       <HeightLight >
         <ButtonBack
-          style={{ alignSelf: 'flex-start' }}
+          style={{ top: 56 }}
           colorArrow='green_dark'
           onPress={back}
         />

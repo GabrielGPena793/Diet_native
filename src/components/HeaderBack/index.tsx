@@ -2,7 +2,11 @@ import React from 'react';
 import { Header, HeaderText } from './styles';
 import { ButtonBack } from '@components/ButtonBack';
 
-export function HeaderBack() {
+interface HeaderBackProps {
+  text: string;
+}
+
+export function HeaderBack({ text }: HeaderBackProps) {
 
   function back() {
     //TODO: add logic
@@ -13,7 +17,7 @@ export function HeaderBack() {
     <Header>
       <ButtonBack colorArrow='gray_300' onPress={back} />
 
-      <HeaderText>  Nova Refeição </HeaderText>
+      <HeaderText>  {text} </HeaderText>
     </Header>
   );
 }

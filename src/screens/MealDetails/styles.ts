@@ -7,14 +7,20 @@ interface ContainerStyleProps {
 export const Container = styled.SafeAreaView<ContainerStyleProps>`
   flex: 1;
 
+
   background: ${({ theme, insideDiet }) =>
     insideDiet ? theme.COLORS.green_light : theme.COLORS.red_light};
 `;
 
 export const Main = styled.View`
   flex: 1;
-
   background-color: ${({theme}) => theme.COLORS.white};
+
+  padding: 40px 24px 0;
+  gap: 24px;
+
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 `
 
 export const Tittle = styled.Text`
@@ -26,6 +32,8 @@ export const Tittle = styled.Text`
 `
 
 export const Description = styled.Text`
+    margin-top: 8px;
+
    ${({ theme }) => css`
     color: ${theme.COLORS.gray_200};
     font-family: ${theme.FONT.REGULAR};
