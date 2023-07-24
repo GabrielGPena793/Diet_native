@@ -29,8 +29,6 @@ export function NewMeal() {
     console.log('click');
   }
   
-  console.log(inputDate)
-
   return (
     <Container>
       <Header>
@@ -53,6 +51,7 @@ export function NewMeal() {
           <Input
             label='Data'
             keyboardType='numeric'
+            placeholder='00/00/0000'
             mask={date}
             halfSize
             onChangeText={(masked, unMasked) => setInputDate(masked)}
@@ -62,6 +61,7 @@ export function NewMeal() {
           <Input
             label='Hora'
             keyboardType='numeric'
+            placeholder='00:00'
             mask={hour}
             halfSize
             onChangeText={(masked, unMasked) => setInputHour(masked)}
@@ -87,7 +87,7 @@ export function NewMeal() {
           </View>
         </View>
 
-        <Button style={{ marginTop: 85 }} text='Cadastrar refeição' activeOpacity={0.7} />
+        <Button style={{ marginTop: 85 }} text='Cadastrar refeição' />
       </Form>
     </Container>
   );

@@ -6,6 +6,7 @@ import { ActivityIndicator } from "react-native";
 import { Home } from "@screens/Home";
 import { DetailPercent } from "@screens/DetailPercent";
 import { NewMeal } from "@screens/NewMeal";
+import { Feedback } from "@screens/Feedback";
 
 import theme from "@theme/default";
 
@@ -14,7 +15,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoad ? <NewMeal /> :  <ActivityIndicator /> }
+      {fontsLoad ? <Feedback feedback="negative"/> :  <ActivityIndicator /> }
     </ThemeProvider>
   );
 }
