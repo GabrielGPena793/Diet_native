@@ -1,5 +1,6 @@
 import { TouchableOpacityProps } from 'react-native'
-import { Bullet, Container, ContainerProps, Text } from './styles';
+import { Container, ContainerProps, Text } from './styles';
+import { Bullet } from '@components/Bullet';
 
 type RadioButtonProps = ContainerProps & TouchableOpacityProps & {
   text: string;

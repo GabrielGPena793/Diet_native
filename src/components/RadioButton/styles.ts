@@ -35,20 +35,6 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
     `}
 `;
 
-interface BulletProps {
-  type: "positive" | "negative";
-}
-
-export const Bullet = styled.View<BulletProps>`
-  height: 8px;
-  width: 8px;
-  border-radius: 999px;
-  margin-right: 8px;
-
-  background-color: ${({ theme, type }) =>
-    type === "positive" ? theme.COLORS.green_dark : theme.COLORS.red_dark};
-`;
-
 export const Text = styled.Text`
   ${({ theme }) => css`
     color: ${theme.COLORS.gray_100};
