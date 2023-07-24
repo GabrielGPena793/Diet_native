@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoad ? <Feedback feedback="negative"/> :  <ActivityIndicator /> }
+      {fontsLoad ? <NewMeal /> :  <ActivityIndicator /> }
     </ThemeProvider>
   );
 }

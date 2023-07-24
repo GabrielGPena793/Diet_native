@@ -7,12 +7,11 @@ import { Button } from '@components/Button';
 import { 
   Container, 
   Form, 
-  Header, 
-  HeaderText, 
   TextRadios, 
   boxShadow
 } from './styles';
 import { date, hour } from '@components/Input/inputMasks';
+import { HeaderBack } from '@components/HeaderBack';
 
 export function NewMeal() {
 
@@ -25,17 +24,9 @@ export function NewMeal() {
     setRadioSelect(type)
   }
 
-  function back() {
-    console.log('click');
-  }
-  
   return (
     <Container>
-      <Header>
-        <ButtonBack colorArrow='gray_300' onPress={back} />
-
-        <HeaderText>  Nova Refeição </HeaderText>
-      </Header>
+      <HeaderBack />
 
       <Form style={boxShadow}>
         <Input label='Nome' placeholder='example' />
