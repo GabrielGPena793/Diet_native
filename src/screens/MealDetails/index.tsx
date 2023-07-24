@@ -27,8 +27,15 @@ export function MealDetails() {
         <Tag text='dentro da dieta' type='positive' />
 
         <ContainerButton>
-          <ButtonIcon icon='pencil' text='Editar refeição' />
-          <ButtonIcon icon='trash' text='Excluir refeição' />
+          <ButtonIcon
+            icon='pencil'
+            text='Editar refeição'
+          />
+          <ButtonIcon
+            colorType='secondary'
+            icon='trash'
+            text='Excluir refeição'
+          />
         </ContainerButton>
 
       </Main>
