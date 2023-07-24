@@ -1,4 +1,4 @@
-import { Plus } from "phosphor-react-native";
+import { PencilSimpleLine, Plus, Trash } from "phosphor-react-native";
 import styled, { css } from "styled-components/native";
 
 
@@ -11,8 +11,6 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   flex-direction: row;
   gap: 12px;
-  margin-top: 8px;
-  margin-bottom: 32px;
 `;
 
 export const Text = styled.Text`
@@ -24,8 +22,28 @@ export const Text = styled.Text`
   `};
 `;
 
-export const Icon = styled(Plus).attrs(({ theme }) => ({
+const PlusIcon = styled(Plus).attrs(({ theme }) => ({
   color: theme.COLORS.white,
   size: 18,
-  weight: 'bold'
+  weight: 'bold',
 }))``;
+
+
+const TrashIcon = styled(Trash).attrs(({ theme }) => ({
+  color: theme.COLORS.white,
+  size: 18,
+  weight: 'bold',
+}))``;
+
+
+const PencilIcon = styled(PencilSimpleLine).attrs(({ theme }) => ({
+  color: theme.COLORS.white,
+  size: 18,
+  weight: 'bold',
+}))``;
+
+export const Icons = {
+  'plus': PlusIcon,
+  'trash': TrashIcon,
+  'pencil': PencilIcon, 
+}

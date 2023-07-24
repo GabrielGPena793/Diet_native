@@ -9,7 +9,7 @@ import {
 import { Image } from 'react-native';
 import { PercentStatus } from '@components/PercentStatus';
 import { MealsList } from '@components/MealsList';
-import { ButtonAddMeal } from '@components/ButtonAddMeal';
+import { ButtonIcon } from '@components/ButtonIcon';
 
 import logo from '@assets/logo.png'
 
@@ -31,7 +31,14 @@ export function Home() {
 
       <Main>
         <Text> Refeições </Text>
-        <ButtonAddMeal />
+        <ButtonIcon
+          style={{
+            marginTop: 8,
+            marginBottom: 32
+          }}
+          icon='plus'
+          text='Nova refeição'
+        />
 
         <MealsList />
       </Main>

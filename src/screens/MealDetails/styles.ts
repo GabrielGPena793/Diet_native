@@ -49,3 +49,11 @@ export const LabelDate = styled.Text`
     font-size: ${theme.FONT_SIZE.sm}px;
   `};
 `
+
+export const ContainerButton = styled.View`
+  gap: 9px;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+
+  flex: 1;
+`
