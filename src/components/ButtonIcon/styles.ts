@@ -26,13 +26,13 @@ export const Button = styled.TouchableOpacity<StyleProps>`
 
 export const Text = styled.Text<StyleProps>`
   ${({ theme, colorType }) => css`
-    color: ${colorType === "primary"
-      ? theme.COLORS.white
-      : theme.COLORS.gray_200};
+    color: ${colorType === "primary" ? theme.COLORS.white : theme.COLORS.gray_200};
     font-family: ${theme.FONT.BOLD};
     font-size: ${theme.FONT_SIZE.sm}px;
   `};
 `;
+
+// Icons =================================================================
 
 const PlusIcon = styled(Plus).attrs<StyleProps>(({ theme, colorType }) => ({
   color: colorType === "primary" ? theme.COLORS.white : theme.COLORS.gray_200,

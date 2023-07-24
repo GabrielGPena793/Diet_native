@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components/native";
 
+export interface StyleProps {
+  colorType?: "primary" | "secondary";
+}
+
 export const Container = styled.TouchableOpacity`
   padding: 18px 24px;
   background-color: ${({theme}) => theme.COLORS.gray_200};

@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, ContainerButton, Description, LabelDate, Main, Tittle } from './styles';
 import { Tag } from '@components/Tag';
 import { HeaderBack } from '@components/HeaderBack';
 import { View } from 'react-native';
 import { ButtonIcon } from '@components/ButtonIcon';
+import { AlertModal } from '@components/AlertModal';
 
 export function MealDetails() {
+  const [showModal, setShowModal] = useState(false);
+
+  function handleModal() {
+    setShowModal(!showModal);
+  }
+
   return (
     <Container insideDiet>
       <HeaderBack text='Refeição' />
@@ -35,10 +42,18 @@ export function MealDetails() {
             colorType='secondary'
             icon='trash'
             text='Excluir refeição'
+            onPress={handleModal}
           />
         </ContainerButton>
 
       </Main>
+
+      <AlertModal
+        text='Deseja realmente excluir o registro da refeição?'
+        showModal={showModal}
+        onCancel={handleModal}
+        onExclude={() => {}}
+      />
     </Container>
   );
 }
