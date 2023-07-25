@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, HeaderText } from './styles';
 import { ButtonBack } from '@components/ButtonBack';
+import { useNavigation } from '@react-navigation/native';
 
 interface HeaderBackProps {
   text: string;
@@ -8,14 +9,15 @@ interface HeaderBackProps {
 
 export function HeaderBack({ text }: HeaderBackProps) {
 
-  function back() {
-    //TODO: add logic
-    console.log('click');
+  const navigation = useNavigation()
+
+  function handleGoBack() {
+    navigation.goBack()
   }
 
   return (
     <Header>
-      <ButtonBack colorArrow='gray_300' onPress={back} />
+      <ButtonBack colorArrow='gray_300' onPress={handleGoBack} />
 
       <HeaderText>  {text} </HeaderText>
     </Header>

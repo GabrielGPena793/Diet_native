@@ -3,23 +3,35 @@ import { View } from 'react-native';
 import { Input } from '@components/Input';
 import { RadioButton } from '@components/RadioButton';
 import { Button } from '@components/Button';
-import { 
-  Container, 
-  Form, 
-  TextRadios, 
+import {
+  Container,
+  Form,
+  TextRadios,
   boxShadow
 } from './styles';
 import { date, hour } from '@components/Input/inputMasks';
 import { HeaderBack } from '@components/HeaderBack';
+import { useNavigation } from '@react-navigation/native';
+
+export type RadioValue = 'positive' | 'negative';
 
 export function NewMeal() {
 
-  const [radioSelect, setRadioSelect] = useState('')
+  const [radioSelect, setRadioSelect] = useState<RadioValue>()
   const [inputDate, setInputDate] = useState('')
   const [inputHour, setInputHour] = useState('')
 
+  const navigate = useNavigation()
 
-  function handleSelectRadio(type: string) {
+  function handleNavigateFeedback() {
+    if (radioSelect) {
+      console.log(radioSelect)
+      navigate.navigate('feedback', { feedbackType: radioSelect })
+    }
+  }
+
+
+  function handleSelectRadio(type: RadioValue) {
     setRadioSelect(type)
   }
 
@@ -77,7 +89,11 @@ export function NewMeal() {
           </View>
         </View>
 
-        <Button style={{ marginTop: 85 }} text='Cadastrar refeição' />
+        <Button
+          style={{ marginTop: 85 }}
+          text='Cadastrar refeição'
+          onPress={handleNavigateFeedback}
+        />
       </Form>
     </Container>
   );

@@ -12,8 +12,16 @@ import { MealsList } from '@components/MealsList';
 import { ButtonIcon } from '@components/ButtonIcon';
 
 import logo from '@assets/logo.png'
+import { useNavigation } from '@react-navigation/native';
 
 export function Home() {
+
+  const navigate = useNavigation()
+
+  function handleNavigationNewMeal() {
+    navigate.navigate('newMeal')
+  }
+
   return (
     <Container>
       <Header >
@@ -27,7 +35,7 @@ export function Home() {
         </Avatar>
       </Header>
 
-      <PercentStatus positive />
+      <PercentStatus positive  />
 
       <Main>
         <Text> Refeições </Text>
@@ -38,6 +46,7 @@ export function Home() {
           }}
           icon='plus'
           text='Nova refeição'
+          onPress={handleNavigationNewMeal}
         />
 
         <MealsList />

@@ -11,11 +11,14 @@ import {
 import { CardMealDetail } from '@components/CardMealDetail';
 import { View } from 'react-native';
 import { ButtonBack } from '@components/ButtonBack';
+import { useNavigation } from '@react-navigation/native';
 
 export function DetailPercent() {
 
+  const navigation = useNavigation()
+
   function back() {
-    console.log('click');
+    navigation.goBack()
   }
 
   return (

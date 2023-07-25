@@ -3,21 +3,15 @@ import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold } from '@expo-googl
 
 import { ActivityIndicator } from "react-native";
 
-import { Home } from "@screens/Home";
-import { DetailPercent } from "@screens/DetailPercent";
-import { NewMeal } from "@screens/NewMeal";
-import { Feedback } from "@screens/Feedback";
-import { MealDetails } from "@screens/MealDetails";
-
-
 import theme from "@theme/default";
+import { Routes } from "@routes/index";
 
 export default function App() {
   const [ fontsLoad ] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold  })
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoad ? <MealDetails /> :  <ActivityIndicator /> }
+      {fontsLoad ? <Routes /> :  <ActivityIndicator /> }
     </ThemeProvider>
   );
 }

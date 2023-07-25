@@ -4,9 +4,10 @@ import { Button } from '@components/Button';
 
 import feedbackPositive from '../../assets/feedbackPositive.png'
 import feedbackNegative from '../../assets/feedbackNegative.png'
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-interface FeedBackProps {
-  feedback: 'positive' | 'negative';
+interface RouteParams {
+  feedbackType: 'positive' | 'negative';
 }
 
 const messages = {
@@ -24,26 +25,31 @@ const messages = {
   }
 }
 
-export function Feedback({ feedback }: FeedBackProps) {
+export function Feedback() {
+  const navigate = useNavigation()
+  const route = useRoute()
+  const { feedbackType } = route.params as RouteParams
+
+  console.log(feedbackType)
 
   function backHome() {
-    //TODO: add logic
+    navigate.navigate('home')
   }
 
   return (
     <Container>
-      <Tittle message={feedback}>
-        {messages[feedback].tittle}
+      <Tittle message={feedbackType}>
+        {messages[feedbackType].tittle}
       </Tittle>
 
       <SubTittle>
-        {messages[feedback].subTittleBefore}
-        <Strong> {messages[feedback].strong} </Strong>
-        {messages[feedback].subTittleAfter}
+        {messages[feedbackType].subTittleBefore}
+        <Strong> {messages[feedbackType].strong} </Strong>
+        {messages[feedbackType].subTittleAfter}
       </SubTittle>
 
       <Image
-        source={feedback === 'positive' ? feedbackPositive :  feedbackNegative}
+        source={feedbackType === 'positive' ? feedbackPositive :  feedbackNegative}
       />
 
       <Button
