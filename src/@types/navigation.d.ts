@@ -7,10 +7,12 @@ export declare global {
         feedbackType: 'positive' | 'negative'
       };
 
-      newMeal: undefined;
+      newMeal: {
+        id?: string;
+      };
 
       detailPercent: undefined;
-      
+
       mealDetails: {
         id: string;
       };

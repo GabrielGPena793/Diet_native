@@ -5,12 +5,25 @@ import { HeaderBack } from '@components/HeaderBack';
 import { View } from 'react-native';
 import { ButtonIcon } from '@components/ButtonIcon';
 import { AlertModal } from '@components/AlertModal';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+interface RoutePrams {
+  id: string;
+}
 
 export function MealDetails() {
   const [showModal, setShowModal] = useState(false);
 
+  const navigation = useNavigation()
+  const params = useRoute()
+  const { id } = params.params as RoutePrams
+ 
   function handleModal() {
     setShowModal(!showModal);
+  }
+
+  function handleNavigate() {
+    navigation.navigate('newMeal', { id })
   }
 
   return (
@@ -37,6 +50,7 @@ export function MealDetails() {
           <ButtonIcon
             icon='pencil'
             text='Editar refeição'
+            onPress={handleNavigate}
           />
           <ButtonIcon
             colorType='secondary'
