@@ -1,3 +1,4 @@
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import styled, { css } from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
@@ -16,6 +17,10 @@ export const Form = styled.View`
 
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
+`
+
+export const ContainerForm = styled(TouchableWithoutFeedback)`
+  height: 100%;
 `
 
 export const TextRadios = styled.Text`
