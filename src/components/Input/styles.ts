@@ -1,16 +1,6 @@
 import MaskInput from 'react-native-mask-input';
 import styled, { css } from "styled-components/native";
 
-export interface ContainerProps {
-  halfSize?: boolean;
-}
-
-export const Container = styled.View<ContainerProps>`
-  ${({ halfSize }) => halfSize && css`
-    flex: 0.5;
-  `}
-`;
-
 export const Label = styled.Text`
   margin-bottom: 4px;
 

@@ -23,6 +23,10 @@ export const ContainerForm = styled(TouchableWithoutFeedback)`
   height: 100%;
 `
 
+export const ContainerRadio = styled.View`
+  position: relative;
+`
+
 export const TextRadios = styled.Text`
   margin-bottom: 8px;
 
@@ -31,6 +35,14 @@ export const TextRadios = styled.Text`
     font-family: ${theme.FONT.BOLD};
     font-size: ${theme.FONT_SIZE.sm}px;
   `};
+`
+
+export const ErrorRadio = styled.Text`
+  color: ${({ theme }) => theme.COLORS.red_erro};
+
+  position: absolute;
+  bottom: -20px;
+
 `
 
 export const boxShadow = {
