@@ -1,63 +1,37 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { SectionList } from 'react-native';
 import { MealCard } from '@components/MealCard';
 import { Text } from './styles';
 
-import { format } from 'date-fns'
-
-const exampleData = [
-  {
-    title: format(new Date(), "dd'.'MM'.'yy"),
-    data: [{
-      hour: format(new Date(), 'H:m'),
-      meal: 'Pizza',
-      insideDiet: true,
-    },
-    {
-      hour: format(new Date(), 'H:m'),
-      meal: 'Lazy Cookies',
-      insideDiet: false,
-    },
-    {
-      hour: format(new Date(), 'H:m'),
-      meal: 'healthy',
-      insideDiet: true,
-    }
-    ],
-  },
-  {
-    title: format(new Date(), "dd'.'MM'.'yy"),
-    data: [{
-      hour: format(new Date(), 'H:m'),
-      meal: 'Pizza',
-      insideDiet: false,
-    },
-    {
-      hour: format(new Date(), 'H:m'),
-      meal: 'Lazy Cookies',
-      insideDiet: true,
-    },
-    {
-      hour: format(new Date(), 'H:m'),
-      meal: 'healthy',
-      insideDiet: true,
-    }
-    ],
-  }
-]
+import { IAllMeals, mealGetAllOrderByDate } from '@storage/meal/mealGetAllOrderByDate';
+import { useFocusEffect } from '@react-navigation/native';
 
 export function MealsList() {
+  const [mealsList, setMealsList] = useState<IAllMeals[]>([])
+
+
+  async function getAllMeals() {
+    const meals = await  mealGetAllOrderByDate()
+
+    setMealsList(meals)
+  }
+
+  useFocusEffect(useCallback(() => {
+    getAllMeals()
+  }, []))
+
   return (
     <SectionList
       showsVerticalScrollIndicator={false}
-      sections={exampleData}
-      keyExtractor={(item, index) => item.meal + index}
+      sections={mealsList}
+      keyExtractor={item => item.id}
       contentContainerStyle={{ paddingBottom: 32 }}
       renderItem={({ item }) => (
-        <MealCard 
+        <MealCard
+          id={item.id}
           hour={item.hour}
           insideDiet={item.insideDiet}
-          meal={item.meal}
+          meal={item.name}
         />
       )}
       renderSectionHeader={({ section: { title } }) => (

@@ -30,8 +30,6 @@ export function Feedback() {
   const route = useRoute()
   const { feedbackType } = route.params as RouteParams
 
-  console.log(feedbackType)
-
   function backHome() {
     navigate.navigate('home')
   }

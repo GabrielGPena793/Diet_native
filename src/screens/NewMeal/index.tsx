@@ -69,7 +69,7 @@ export function NewMeal() {
 
     try {
       const newMeal = {
-        id: new Date().toDateString(),
+        id: new Date().getMilliseconds().toString(),
         name,
         description,
         date,

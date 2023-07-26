@@ -38,6 +38,7 @@ export const ContainerMeal = styled.View`
 
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const TextMeal = styled.Text`

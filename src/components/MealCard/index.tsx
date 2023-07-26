@@ -14,7 +14,7 @@ interface MealCardProps {
   id: string;
   hour: string;
   meal: string;
-  insideDiet: boolean;
+  insideDiet: 'positive' | 'negative';
 }
 
 export function MealCard({ id, hour, insideDiet, meal }: MealCardProps) {
@@ -22,7 +22,7 @@ export function MealCard({ id, hour, insideDiet, meal }: MealCardProps) {
   const navigate = useNavigation()
 
   function handleNavigate() {
-    navigate.navigate("mealDetails", { id})
+    navigate.navigate("mealDetails", { id })
   }
 
   return (
@@ -35,7 +35,7 @@ export function MealCard({ id, hour, insideDiet, meal }: MealCardProps) {
         <TextMeal>
           {meal}
         </TextMeal>
-        <Bullet insideDiet={insideDiet} />
+        <Bullet insideDiet={insideDiet === 'positive'} />
       </ContainerMeal>
     </Container>
   );
