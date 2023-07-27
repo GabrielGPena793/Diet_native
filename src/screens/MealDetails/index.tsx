@@ -8,6 +8,7 @@ import { AlertModal } from '@components/AlertModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { MealDTO } from '@storage/meal/MealDTO';
 import { mealGetById } from '@storage/meal/mealGetById';
+import { mealDelete } from '@storage/meal/mealDelete';
 
 interface RoutePrams {
   id: string;
@@ -30,9 +31,23 @@ export function MealDetails() {
   }
 
   async function getMealDetails() {
-    const meal = await mealGetById(id)
+    try {
+      const meal = await mealGetById(id)
+      setMeal(meal)
 
-    setMeal(meal)
+    } catch (error) {
+      console.log('getMealDetails', error)
+    }
+  }
+
+  async function deleteMeal() {
+    try {
+      await mealDelete(meal.id, meal.date)
+
+      navigation.navigate('home')
+    } catch (error) {
+      console.log('deleteMeal', error)
+    }
   }
 
 
@@ -81,7 +96,7 @@ export function MealDetails() {
         text='Deseja realmente excluir o registro da refeição?'
         showModal={showModal}
         onCancel={handleModal}
-        onExclude={() => { }}
+        onExclude={deleteMeal}
       />
     </Container>
   );
