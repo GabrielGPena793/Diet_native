@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   HeightLight,
@@ -12,14 +12,26 @@ import { CardMealDetail } from '@components/CardMealDetail';
 import { View } from 'react-native';
 import { ButtonBack } from '@components/ButtonBack';
 import { useNavigation } from '@react-navigation/native';
+import { getRecordSequence } from '@storage/percent/getRecordSequence';
 
 export function DetailPercent() {
+
+  const [sequence, setSequence] = useState(0)
 
   const navigation = useNavigation()
 
   function back() {
     navigation.goBack()
   }
+
+  async function getRecordSequenceDiet() {
+    const sequence = await getRecordSequence();
+    setSequence(sequence)
+  }
+
+  useEffect(() => {
+    getRecordSequenceDiet()
+  }, [])
 
   return (
     <Container insideDiet>
@@ -40,7 +52,7 @@ export function DetailPercent() {
 
         <CardMealDetail
           bgColor='neutral'
-          title='22'
+          title={`${sequence}`}
           description='melhor sequência de pratos dentro da dieta'
         />
 

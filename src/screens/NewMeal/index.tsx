@@ -180,7 +180,6 @@ export function NewMeal() {
               label='Data'
               keyboardType='numeric'
               placeholder='00/00/0000'
-              disabled={true}
               mask={date}
               halfSize
               error={errors.date}
