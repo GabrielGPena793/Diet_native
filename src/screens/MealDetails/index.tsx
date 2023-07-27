@@ -7,11 +7,12 @@ import { ButtonIcon } from '@components/ButtonIcon';
 import { AlertModal } from '@components/AlertModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { MealDTO } from '@storage/meal/MealDTO';
-import { mealGetById } from '@storage/meal/mealGetById';
+import { mealGetByIdAndDate } from '@storage/meal/mealGetByIdAndDate';
 import { mealDelete } from '@storage/meal/mealDelete';
 
 interface RoutePrams {
   id: string;
+  date: string;
 }
 
 export function MealDetails() {
@@ -20,19 +21,19 @@ export function MealDetails() {
 
   const navigation = useNavigation()
   const params = useRoute()
-  const { id } = params.params as RoutePrams
+  const { id, date } = params.params as RoutePrams
 
   function handleModal() {
     setShowModal(!showModal);
   }
 
   function handleNavigate() {
-    navigation.navigate('newMeal', { id })
+    navigation.navigate('newMeal', { id, date })
   }
 
   async function getMealDetails() {
     try {
-      const meal = await mealGetById(id)
+      const meal = await mealGetByIdAndDate(id, date)
       setMeal(meal)
 
     } catch (error) {
@@ -57,7 +58,7 @@ export function MealDetails() {
 
 
   return (
-    <Container insideDiet>
+    <Container insideDiet={meal?.insideDiet}>
       <HeaderBack text='Refeição' />
       <Main>
         <View>

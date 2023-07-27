@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Keyboard, Text, View } from 'react-native';
 import { RadioButton } from '@components/RadioButton';
 import { Button } from '@components/Button';
@@ -15,14 +15,21 @@ import { date, hour } from '@components/Input/inputMasks';
 import { HeaderBack } from '@components/HeaderBack';
 import { ControlledInput } from '@components/ControlledInput';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { MealDTO } from '@storage/meal/MealDTO';
 import { mealCreate } from '@storage/meal/mealCreate';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { mealGetByIdAndDate } from '@storage/meal/mealGetByIdAndDate';
+import { mealEdit } from '@storage/meal/mealEdit';
 
 export type RadioValue = 'positive' | 'negative';
+
+type RoutePrams = {
+  id: string;
+  date: string;
+}
 
 type FormData = {
   name: string;
@@ -42,12 +49,20 @@ export function NewMeal() {
 
   const [radioSelect, setRadioSelect] = useState<RadioValue>()
   const [radioError, setRadioError] = useState(false)
+  const [meal, setMeal] = useState<MealDTO>()
 
-  const { control, handleSubmit, formState: { errors }} = useForm<FormData>({
-    resolver: yupResolver(schema),
+  const { 
+    control, 
+    handleSubmit, 
+    formState: { errors },
+    setValue
+  } = useForm<FormData>({
+    resolver: yupResolver(schema)
   })
 
   const navigate = useNavigation()
+  const route = useRoute()
+  const params = route.params as RoutePrams
 
   function navigateFeedback() {
     if (radioSelect) {
@@ -60,9 +75,9 @@ export function NewMeal() {
     setRadioSelect(type)
   }
 
-  async function handleAddNewMeal(mealData: FormData) {
+  async function addNewMeal(mealData: FormData) {
     const { date, description, hour, name } = mealData
-    
+
     if (!radioSelect) {
       return setRadioError(true)
     }
@@ -74,8 +89,8 @@ export function NewMeal() {
         description,
         date,
         hour,
-        insideDiet: radioSelect, 
-      }  as MealDTO
+        insideDiet: radioSelect,
+      } as MealDTO
 
       await mealCreate(newMeal)
 
@@ -85,6 +100,55 @@ export function NewMeal() {
     }
   }
 
+  async function editMeal(mealData: FormData) {
+    try {
+      const { id } = params
+
+      const newMeal = {
+        ...meal, 
+        ...mealData,
+        insideDiet: radioSelect
+      } as MealDTO
+
+
+      await mealEdit(id as string, newMeal)
+
+      navigateFeedback()
+    } catch (error) {
+      console.log('editMeal', error)
+    }
+  }
+
+  async function handleSubmitMeal(mealData: FormData) {
+    if (meal) {
+      await editMeal(mealData)
+    } else {
+      await addNewMeal(mealData)
+    }
+  }
+
+  async function getMeal() {
+    try {
+      const { id, date } = params as RoutePrams
+      const storageMeal = await mealGetByIdAndDate(id, date)
+
+      setMeal(storageMeal)
+      handleSelectRadio(storageMeal.insideDiet)
+      setValue('name', storageMeal.name)
+      setValue('description', storageMeal.description)
+      setValue('hour', storageMeal.hour)
+      setValue('date', storageMeal.date)
+    } catch (error) {
+      console.log('getMeal', error)
+    }
+  }
+
+  useEffect(() => {
+    if(params?.id) {
+      getMeal()
+    }
+  }, [params?.id])
+
   return (
     <Container>
       <HeaderBack text='Nova refeição' />
@@ -93,11 +157,11 @@ export function NewMeal() {
         <Form style={boxShadow}>
           <ControlledInput
             name='name'
-            control={control} 
-            label='Nome' 
+            control={control}
+            label='Nome'
             placeholder='example'
             error={errors.name}
-           />
+          />
 
           <ControlledInput
             name='description'
@@ -116,6 +180,7 @@ export function NewMeal() {
               label='Data'
               keyboardType='numeric'
               placeholder='00/00/0000'
+              disabled={true}
               mask={date}
               halfSize
               error={errors.date}
@@ -138,7 +203,8 @@ export function NewMeal() {
             <View style={{ flexDirection: 'row', gap: 20 }}>
               <RadioButton
                 active={radioSelect === 'positive'}
-                text='Sim' type='positive'
+                text='Sim' 
+                type='positive'
                 onSelect={handleSelectRadio}
               />
 
@@ -149,13 +215,13 @@ export function NewMeal() {
                 onSelect={handleSelectRadio}
               />
             </View>
-            {(radioError && !radioSelect) && <ErrorRadio>Selecione uma das opções</ErrorRadio> }
+            {(radioError && !radioSelect) && <ErrorRadio>Selecione uma das opções</ErrorRadio>}
           </ContainerRadio>
 
           <Button
             style={{ marginTop: 85 }}
             text='Cadastrar refeição'
-            onPress={handleSubmit(handleAddNewMeal)}
+            onPress={handleSubmit(handleSubmitMeal)}
           />
         </Form>
       </ContainerForm>

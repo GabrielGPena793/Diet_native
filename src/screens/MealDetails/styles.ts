@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/native";
 
 interface ContainerStyleProps {
-  insideDiet: boolean;
+  insideDiet: 'positive' | 'negative';
 }
 
 export const Container = styled.SafeAreaView<ContainerStyleProps>`
@@ -9,7 +9,7 @@ export const Container = styled.SafeAreaView<ContainerStyleProps>`
 
 
   background: ${({ theme, insideDiet }) =>
-    insideDiet ? theme.COLORS.green_light : theme.COLORS.red_light};
+    insideDiet === 'positive' ? theme.COLORS.green_light : theme.COLORS.red_light};
 `;
 
 export const Main = styled.View`

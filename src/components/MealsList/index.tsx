@@ -33,6 +33,7 @@ export function MealsList() {
       renderItem={({ item }) => (
         <MealCard
           id={item.id}
+          date={item.date}
           hour={item.hour}
           insideDiet={item.insideDiet}
           meal={item.name}

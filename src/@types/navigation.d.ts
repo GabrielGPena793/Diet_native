@@ -8,13 +8,15 @@ export declare global {
       };
 
       newMeal?: {
-        id?: string;
+        id: string;
+        date: string;
       };
 
       detailPercent: undefined;
 
       mealDetails: {
         id: string;
+        date: string;
       };
     }
   }

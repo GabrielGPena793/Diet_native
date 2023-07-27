@@ -1,12 +1,13 @@
-import { mealGetAll } from "./mealGetAll";
+
 import { AppError } from "@utils/appError";
+import { mealGetByDate } from "./mealGetByDate";
 
 
 
-export async function mealGetById(id: string) {
+export async function mealGetByIdAndDate(id: string, date: string) {
 
   try {
-    const meals = await mealGetAll()
+    const meals = await mealGetByDate(date);
 
     if (meals.length === 0) { 
       throw new AppError("Não existe refeição cadastrada")

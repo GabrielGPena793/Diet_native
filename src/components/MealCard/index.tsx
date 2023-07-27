@@ -13,16 +13,17 @@ import { useNavigation } from '@react-navigation/native';
 interface MealCardProps {
   id: string;
   hour: string;
+  date: string;
   meal: string;
   insideDiet: 'positive' | 'negative';
 }
 
-export function MealCard({ id, hour, insideDiet, meal }: MealCardProps) {
+export function MealCard({ id, hour, insideDiet, meal, date }: MealCardProps) {
 
   const navigate = useNavigation()
 
   function handleNavigate() {
-    navigate.navigate("mealDetails", { id })
+    navigate.navigate("mealDetails", { id, date })
   }
 
   return (
