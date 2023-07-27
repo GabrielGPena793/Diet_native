@@ -51,6 +51,10 @@ export function NewMeal() {
   const [radioError, setRadioError] = useState(false)
   const [meal, setMeal] = useState<MealDTO>()
 
+  const navigate = useNavigation()
+  const route = useRoute()
+  const params = route.params as RoutePrams
+
   const { 
     control, 
     handleSubmit, 
@@ -59,10 +63,6 @@ export function NewMeal() {
   } = useForm<FormData>({
     resolver: yupResolver(schema)
   })
-
-  const navigate = useNavigation()
-  const route = useRoute()
-  const params = route.params as RoutePrams
 
   function navigateFeedback() {
     if (radioSelect) {

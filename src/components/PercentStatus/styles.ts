@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 
 export interface ContainerStatusColor {
-  positive: boolean;
+  positive?: boolean;
 }
 
 export const Container = styled.View<ContainerStatusColor>`

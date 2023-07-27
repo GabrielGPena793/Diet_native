@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Arrow, ArrowDetail, Container, ContainerStatusColor, TextSmall, TextStrong } from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { MealsDetails, getDetails } from '@storage/percent/getDetails';
 
 interface PercentStatusProps extends ContainerStatusColor {}
 
 export function PercentStatus({ positive }: PercentStatusProps) {
+
+  const [percent, setPercent] = useState<MealsDetails>()
 
   const navigation = useNavigation()
 
@@ -12,10 +15,23 @@ export function PercentStatus({ positive }: PercentStatusProps) {
     navigation.navigate("detailPercent")
   }
 
+  async function getPercentDetails() {
+    try {
+      const details = await getDetails()
+      setPercent(details)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useFocusEffect(useCallback(() => {
+    getPercentDetails()
+  },[]))
+
   return (
-    <Container positive={ positive }>
+    <Container positive={ percent?.isPositiveDiet }>
       <TextStrong>
-        90,86%
+        {percent?.percents}%
       </TextStrong>
 
       <TextSmall>

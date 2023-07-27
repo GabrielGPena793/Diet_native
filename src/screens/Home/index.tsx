@@ -35,7 +35,7 @@ export function Home() {
         </Avatar>
       </Header>
 
-      <PercentStatus positive  />
+      <PercentStatus positive   />
 
       <Main>
         <Text> Refeições </Text>

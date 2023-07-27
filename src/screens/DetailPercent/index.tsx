@@ -13,23 +13,14 @@ import { View } from 'react-native';
 import { ButtonBack } from '@components/ButtonBack';
 import { useNavigation } from '@react-navigation/native';
 import { getRecordSequence } from '@storage/percent/getRecordSequence';
-import { MealDTO } from '@storage/meal/MealDTO';
-import { mealGetAll } from '@storage/meal/mealGetAll';
+import { getDetails, MealsDetails } from '@storage/percent/getDetails';
 
 export function DetailPercent() {
 
   const [sequence, setSequence] = useState(0)
-  const [meals, setMeals] = useState<MealDTO[]>()
+  const [mealsDetails, setMealsDetails] = useState<MealsDetails>()
 
   const navigation = useNavigation()
-
-  const mealInsideDiet = meals?.filter(meal => meal.insideDiet === 'positive')
-  const mealOutDiet = meals?.filter(meal => meal.insideDiet === 'negative')
-  let percentInsideDiet: number = 0
-
-  if (mealInsideDiet && meals) {
-    percentInsideDiet =  (mealInsideDiet?.length/meals?.length) * 100
-  }
 
   function back() {
     navigation.goBack()
@@ -44,23 +35,23 @@ export function DetailPercent() {
     }
   }
   
-  async function getAllMeals() {
+  async function getMealsDetails() {
     try {
-      const allMeals = await mealGetAll()
-      setMeals(allMeals)
+      const mealDetails = await getDetails()
+      setMealsDetails(mealDetails)
     } catch (error) {
-      console.log('getAllMeals', error)
+      console.log('getMealsDetails', error)
     }
   }
 
 
   useEffect(() => {
-    getAllMeals()
+    getMealsDetails()
     getRecordSequenceDiet()
   }, [])
 
   return (
-    <Container insideDiet>
+    <Container insideDiet={mealsDetails?.isPositiveDiet}>
 
       <HeightLight >
         <ButtonBack
@@ -69,7 +60,7 @@ export function DetailPercent() {
           onPress={back}
         />
 
-        <TextStrong> {percentInsideDiet.toFixed(2)}% </TextStrong>
+        <TextStrong> {mealsDetails?.percents}% </TextStrong>
         <Text> das refeições dentro da dieta </Text>
       </HeightLight>
 
@@ -84,7 +75,7 @@ export function DetailPercent() {
 
         <CardMealDetail
           bgColor='neutral'
-          title={`${meals?.length}`}
+          title={`${mealsDetails?.total}`}
           description='refeições registradas'
         />
 
@@ -92,14 +83,14 @@ export function DetailPercent() {
           <CardMealDetail
             bgColor='green'
             halfSize
-            title={`${mealInsideDiet?.length}`}
+            title={`${mealsDetails?.insideDiet}`}
             description='refeições dentro da dieta'
           />
 
           <CardMealDetail
             bgColor='red'
             halfSize
-            title={`${mealOutDiet?.length}`}
+            title={`${mealsDetails?.outDiet}`}
             description='refeições fora da dieta'
           />
         </View>
