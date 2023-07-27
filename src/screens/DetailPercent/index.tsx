@@ -25,8 +25,12 @@ export function DetailPercent() {
   }
 
   async function getRecordSequenceDiet() {
-    const sequence = await getRecordSequence();
-    setSequence(sequence)
+    try {
+      const sequence = await getRecordSequence();
+      setSequence(sequence)
+    } catch (error) {
+      console.log('getRecordSequenceDiet', error);
+    }
   }
 
   useEffect(() => {
