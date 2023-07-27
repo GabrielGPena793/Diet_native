@@ -13,12 +13,23 @@ import { View } from 'react-native';
 import { ButtonBack } from '@components/ButtonBack';
 import { useNavigation } from '@react-navigation/native';
 import { getRecordSequence } from '@storage/percent/getRecordSequence';
+import { MealDTO } from '@storage/meal/MealDTO';
+import { mealGetAll } from '@storage/meal/mealGetAll';
 
 export function DetailPercent() {
 
   const [sequence, setSequence] = useState(0)
+  const [meals, setMeals] = useState<MealDTO[]>()
 
   const navigation = useNavigation()
+
+  const mealInsideDiet = meals?.filter(meal => meal.insideDiet === 'positive')
+  const mealOutDiet = meals?.filter(meal => meal.insideDiet === 'negative')
+  let percentInsideDiet: number = 0
+
+  if (mealInsideDiet && meals) {
+    percentInsideDiet =  (mealInsideDiet?.length/meals?.length) * 100
+  }
 
   function back() {
     navigation.goBack()
@@ -32,8 +43,19 @@ export function DetailPercent() {
       console.log('getRecordSequenceDiet', error);
     }
   }
+  
+  async function getAllMeals() {
+    try {
+      const allMeals = await mealGetAll()
+      setMeals(allMeals)
+    } catch (error) {
+      console.log('getAllMeals', error)
+    }
+  }
+
 
   useEffect(() => {
+    getAllMeals()
     getRecordSequenceDiet()
   }, [])
 
@@ -47,7 +69,7 @@ export function DetailPercent() {
           onPress={back}
         />
 
-        <TextStrong> 90,86% </TextStrong>
+        <TextStrong> {percentInsideDiet.toFixed(2)}% </TextStrong>
         <Text> das refeições dentro da dieta </Text>
       </HeightLight>
 
@@ -62,7 +84,7 @@ export function DetailPercent() {
 
         <CardMealDetail
           bgColor='neutral'
-          title='109'
+          title={`${meals?.length}`}
           description='refeições registradas'
         />
 
@@ -70,14 +92,14 @@ export function DetailPercent() {
           <CardMealDetail
             bgColor='green'
             halfSize
-            title='99'
+            title={`${mealInsideDiet?.length}`}
             description='refeições dentro da dieta'
           />
 
           <CardMealDetail
             bgColor='red'
             halfSize
-            title='10'
+            title={`${mealOutDiet?.length}`}
             description='refeições fora da dieta'
           />
         </View>

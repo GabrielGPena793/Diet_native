@@ -66,7 +66,6 @@ export function NewMeal() {
 
   function navigateFeedback() {
     if (radioSelect) {
-      console.log(radioSelect)
       navigate.navigate('feedback', { feedbackType: radioSelect })
     }
   }
