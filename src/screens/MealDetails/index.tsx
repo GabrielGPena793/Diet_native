@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, ContainerButton, Description, LabelDate, Main, Tittle } from './styles';
 import { Tag } from '@components/Tag';
 import { HeaderBack } from '@components/HeaderBack';
@@ -6,6 +6,8 @@ import { View } from 'react-native';
 import { ButtonIcon } from '@components/ButtonIcon';
 import { AlertModal } from '@components/AlertModal';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { MealDTO } from '@storage/meal/MealDTO';
+import { mealGetById } from '@storage/meal/mealGetById';
 
 interface RoutePrams {
   id: string;
@@ -13,11 +15,12 @@ interface RoutePrams {
 
 export function MealDetails() {
   const [showModal, setShowModal] = useState(false);
+  const [meal, setMeal] = useState<MealDTO>({} as MealDTO)
 
   const navigation = useNavigation()
   const params = useRoute()
   const { id } = params.params as RoutePrams
- 
+
   function handleModal() {
     setShowModal(!showModal);
   }
@@ -26,25 +29,37 @@ export function MealDetails() {
     navigation.navigate('newMeal', { id })
   }
 
+  async function getMealDetails() {
+    const meal = await mealGetById(id)
+
+    setMeal(meal)
+  }
+
+
+  useEffect(() => {
+    getMealDetails()
+  }, [id])
+
+
   return (
     <Container insideDiet>
       <HeaderBack text='Refeição' />
       <Main>
         <View>
-          <Tittle>Sanduíche</Tittle>
+          <Tittle>{meal.name}</Tittle>
           <Description>
-            Sanduíche de pão integral com atum e salada de alface e tomate
+            {meal.description}
           </Description>
         </View>
 
         <View>
           <LabelDate>Data e hora</LabelDate>
           <Description>
-            12/08/2022 às 16:00
+            {meal.date} ás {meal.hour}
           </Description>
         </View>
 
-        <Tag text='dentro da dieta' type='positive' />
+        <Tag text='dentro da dieta' type={meal.insideDiet} />
 
         <ContainerButton>
           <ButtonIcon
@@ -66,7 +81,7 @@ export function MealDetails() {
         text='Deseja realmente excluir o registro da refeição?'
         showModal={showModal}
         onCancel={handleModal}
-        onExclude={() => {}}
+        onExclude={() => { }}
       />
     </Container>
   );

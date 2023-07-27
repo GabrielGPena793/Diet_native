@@ -11,9 +11,13 @@ export function MealsList() {
 
 
   async function getAllMeals() {
-    const meals = await  mealGetAllOrderByDate()
+    try {
+      const meals = await mealGetAllOrderByDate()
+      setMealsList(meals)
 
-    setMealsList(meals)
+    } catch (error) {
+      console.log("getAllMeals", error)
+    }
   }
 
   useFocusEffect(useCallback(() => {
